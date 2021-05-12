@@ -23,7 +23,6 @@ else:
 
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN') # accesses the discord token
-GUILD = os.getenv('DISCORD_GUILD') # accesses the name of the server
 COINCHANNEL = os.getenv('COIN_CHANNEL') # accesses the channel id of the channel coins are shown in
 ADMINCHANNEL = os.getenv('ADMIN_CHANNEL') # accesses the channel id of the channel used for maintenence
 GUILDID = os.getenv('DISCORD_GUILD_ID') # accesses the server id of the server this version of the bot is active in
