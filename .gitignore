@@ -4,6 +4,7 @@ coins - Copy.txt
 currentbet.txt
 messagessent.txt
 backup.env
+sendmessage.bat
 /Screenshots
 /__pycache__
 /backup
