@@ -53,7 +53,7 @@ msg = ""
 seconds = 0
 
 async def coinCreate():
-    global coinavailable,coingiven,msg
+    global coinavailable,coingiven,msg,randomtime
     print("creating new coin")
     if coinavailable != True:
         coingiven = False
@@ -147,6 +147,10 @@ and different code is run based on what each message contains.'''
                     await msg.delete()
                     await asyncio.sleep(10)
                     coinavailable = False
+
+        if readmsg.startswith("coin timeleft") and admin:
+            await message.channel.send("<a:cowardcoin:813889535699189871> | "+str(round(randomtime-time()))+" seconds left")
+
 
         
         if readmsg.startswith("coin count"):
