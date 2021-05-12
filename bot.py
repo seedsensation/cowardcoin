@@ -62,13 +62,13 @@ seconds = 0
 
 
 
-
 winconfirmneeded = False
 totalpool = 0 # current total betting pool is set to 0
 bet = [] # sets all of these to empty lists to avoid errors when using append
 options = []
 odds = []
 currentbetmessage = ""
+
 
 async def betUpdate(bet,options,seconds,totalpool,odds,currentbetmessage):
     betmessage = str("<a:cowardcoin:813889535699189871> A BET IS NOW ACTIVE! <a:cowardcoin:813889535699189871>\nYou have "+str(seconds)+" seconds to make your bets by typing 'bet coins (option number) (coins)'!\nThe total betting pool is "+str(totalpool)+".\nYour Options Are:\n")
