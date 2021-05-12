@@ -67,7 +67,7 @@ async def coinCreate():
             
         msg = await channel.send("A New Coin is Available!\nType 'get coin' to claim it!",file=file)
         coinavailable=True
-        randomtime = time()+randint(0,1800)
+        randomtime = time()+randint(60,3600)
 
         await asyncio.sleep(30)
         await msg.delete()
@@ -146,6 +146,7 @@ and different code is run based on what each message contains.'''
                     await message.delete()
                        
                     await msg.delete()
+                    await asyncio.sleep(10)
                     coinavailable = False
 
         
