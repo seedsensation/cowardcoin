@@ -62,12 +62,6 @@ seconds = 0
 
 
 
-winconfirmneeded = False
-totalpool = 0 # current total betting pool is set to 0
-bet = [] # sets all of these to empty lists to avoid errors when using append
-options = []
-odds = []
-currentbetmessage = ""
 
 
 async def betUpdate(bet,options,seconds,totalpool,odds,currentbetmessage):
