@@ -57,7 +57,7 @@ async def coinCreate():
     print("creating new coin")
     if coinavailable != True:
         coingiven = False
-        file = discord.File(r"C:\Users\jemst\Desktop\Discord Bots\Cowardcoin\cowardcoin.gif",filename="cowardcoin.gif")
+        file = discord.File("cowardcoin.gif",filename="cowardcoin.gif")
         print("selected gif file")
         if maintenence == False:
             channel = client.get_channel(int(COINCHANNEL))
