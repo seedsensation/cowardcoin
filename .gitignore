@@ -3,5 +3,7 @@ coins.txt
 coins - Copy.txt
 currentbet.txt
 messagessent.txt
+backup.env
 /Screenshots
 /__pycache__
+/backup
