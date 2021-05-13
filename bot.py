@@ -167,7 +167,9 @@ and different code is run based on what each message contains.'''
             hours = minutes/60
             hours = floor(hours)
             minutes = minutes-(hours*60)
+            minutes = floor(minutes)
             seconds=seconds-(minutes*60)
+            seconds = floor(seconds)
             
             if floor(minutes) > 0:
                 if floor(hours) > 0:
