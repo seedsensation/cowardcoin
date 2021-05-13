@@ -107,13 +107,18 @@ and different code is run based on what each message contains.'''
     if message.author == client.user:
         return
 ### if the author is the bot, cancel everything
+
+    currenttime = time()
+    if currenttime >= randomtime and coinscreated == 0 and randomtime-currenttime <= 0:
+            coinscreated += 1
+            await coinCreate()
     
     if int(message.guild.id) == int(GUILDID): # if the message is in the pre-set server: (all code for messages should be within this if statement)
 
         if admin:
-            print(message.author.name+" (admin) in "+message.channel.name+": "+message.content)
+            print(message.author.name+" (admin) in "+message.channel.name+": "+message.content+" ("+str(round(randomtime-currenttime))+" seconds left)")
         else:
-            print(message.author.name+": "+message.content)  
+            print(message.author.name+": "+message.content+" ("+str(round(randomtime-currenttime))+" seconds left)")  
 
             
         readmsg = message.content.lower() # sets readmsg to the content of the message, in all lower case
@@ -206,10 +211,6 @@ and different code is run based on what each message contains.'''
         textfile = open("messagessent.txt","w")
         textfile.write(str(messagessent))
         textfile.close()
-        currenttime = time()
-        if currenttime >= randomtime and coinscreated == 0:
-            coinscreated += 1
-            await coinCreate()
 
         
         
