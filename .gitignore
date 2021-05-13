@@ -1,11 +1,6 @@
 .env
 coins.txt
-coins - Copy.txt
 currentbet.txt
 messagessent.txt
-backup.env
-sendmessage.bat
-run.bat
-/Screenshots
 /__pycache__
-/backup
+/logs
