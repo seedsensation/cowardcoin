@@ -5,10 +5,16 @@ import logging ### imports all required libraries
 import discord
 from dotenv import load_dotenv ### lets the program access secure file containing user token
 from random import randint
-from time import time
+from time import *
 from math import ceil,floor
 
-logging.basicConfig(level=logging.INFO) ### activates logging 
+logtime = strftime("%Y.%m.%d - %H.%M.%S")
+file = open("%s.txt"% logtime,"w")
+file.close()
+logging.basicConfig(filename="logs\\%s.txt" % logtime,
+                level=logging.INFO,
+                format='%(levelname)s: %(asctime)s %(message)s',
+                datefmt='%m/%d/%Y %I:%M:%S') ### activates logging
 
 
 
