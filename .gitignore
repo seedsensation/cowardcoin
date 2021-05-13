@@ -1,6 +1,6 @@
 .env
-coins.txt
-currentbet.txt
-messagessent.txt
+/files/coins.txt
+/files/currentbet.txt
+/files/messagessent.txt
 /__pycache__
 /logs

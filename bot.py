@@ -9,7 +9,7 @@ from time import *
 from math import ceil,floor
 
 logtime = strftime("%Y.%m.%d - %H.%M.%S")
-file = open("%s.txt"% logtime,"w")
+file = open("logs\\%s.txt"% logtime,"w")
 file.close()
 logging.basicConfig(filename="logs\\%s.txt" % logtime,
                 level=logging.INFO,
@@ -64,7 +64,7 @@ async def coinCreate():
     print("creating new coin")
     if coinavailable != True:
         coingiven = False
-        file = discord.File("cowardcoin.gif",filename="cowardcoin.gif")
+        file = discord.File("files\\cowardcoin.gif",filename="cowardcoin.gif")
         print("selected gif file")
         if maintenence == False:
             channel = client.get_channel(int(COINCHANNEL))
@@ -140,7 +140,7 @@ and different code is run based on what each message contains.'''
                 if coinavailable and coingiven == False:
                     coinscreated = 0
                     coingiven = True
-                    textfile = open("coins.txt","r")
+                    textfile = open("files\\coins.txt","r")
                     coins = eval(textfile.read())
                     textfile.close()
                     coinsadd = randint(150,350)
@@ -149,7 +149,7 @@ and different code is run based on what each message contains.'''
                     except KeyError:
                         coins[message.author.id] = coinsadd
                     
-                    textfile = open("coins.txt","w")
+                    textfile = open("files\\coins.txt","w")
                     textfile.write(str(coins))
                     textfile.close()
                     
@@ -168,10 +168,10 @@ and different code is run based on what each message contains.'''
         if readmsg.startswith("coin count"):
             author = message.author.name
             authorid = message.author.id
-            textfile = open("coins.txt","r")
+            textfile = open("files\\coins.txt","r")
             coins = eval(textfile.read())
             textfile.close()
-            textfile = open("messagessent.txt","r")
+            textfile = open("files\\messagessent.txt","r")
             messagessent = eval(textfile.read())
             textfile.close()
             author = message.author.name
@@ -186,7 +186,7 @@ and different code is run based on what each message contains.'''
             await message.channel.send("<a:cowardcoin:813889535699189871> | 'get coin' - claims the available coin\n<a:cowardcoin:813889535699189871> | 'coin count' - show how many coins you have\n<a:cowardcoin:813889535699189871> | 'coin help' - shows this list")
 
 
-        textfile = open("messagessent.txt","r")
+        textfile = open("files\\messagessent.txt","r")
         messagessent = eval(textfile.read())
         textfile.close()
         
@@ -201,21 +201,21 @@ and different code is run based on what each message contains.'''
             messagessent[author][1] = ceil(messagessent[author][1]*1.25)
             coinsadd = randint(20,50)
             msg = await message.channel.send("<a:cowardcoin:813889535699189871> | You got +"+str(coinsadd)+" CowardCoins, "+message.author.mention+"!")
-            textfile = open("coins.txt","r")
+            textfile = open("files\\coins.txt","r")
             coins = eval(textfile.read())
             textfile.close()
             try:
                 coins[message.author.id] = coins[message.author.id]+coinsadd
             except KeyError:
                 coins[message.author.id] = coinsadd
-            textfile = open("coins.txt","w")
+            textfile = open("files\\coins.txt","w")
             textfile.write(str(coins))
             textfile.close()
             await asyncio.sleep(5)
             coindrop = False
             await msg.delete()
 
-        textfile = open("messagessent.txt","w")
+        textfile = open("files\\messagessent.txt","w")
         textfile.write(str(messagessent))
         textfile.close()
 
