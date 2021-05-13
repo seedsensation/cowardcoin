@@ -57,6 +57,8 @@ coingiven = False
 
 confirmationneeded = False
 
+firstrun = True
+
 msg = ""
 
 seconds = 0
@@ -105,6 +107,11 @@ and different code is run based on what each message contains.'''
     global randomtime
     global coindrop
     global confirmationneeded
+    global firstrun
+
+    if firstrun:
+        firstrun = False
+        asyncio.create_task(checkforcoin())
     
     admin = False
     for roles in message.author.roles: # for each role the author of the message has:
@@ -245,10 +252,26 @@ and different code is run based on what each message contains.'''
         textfile.close()
 
         
+async def checkforcoin():
+    global randomtime,coinscreated
+    print("checking for coin")
+    while True:
+        print("a")
+        currenttime=time()
+        print("current time")
+        print(currenttime)
+        print(randomtime)
+        if (currenttime >= randomtime or randomtime-currenttime <= 0) and coinscreated == 0:
+            print("the")
+            coinscreated += 1
+            asyncio.create_task(coinCreate())
+            print("theres a coin!")
         
-            
-                
+        print("no coin")
+        sleep(10)
+
 
 
 
 client.run(TOKEN)
+
