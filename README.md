@@ -1,7 +1,5 @@
 # Welcome to Cowardcoin!
 
-## This branch is currently broken, but... Eventually... it will have a system that lets the bot create coins without having to rely on messages being sent first.
-
 **This bot was something I started working on in my spare time, then I realised I could make it into my Computer Science A-Level NEA, so I did!**
 
 Required Libraries for Python 3.9:
