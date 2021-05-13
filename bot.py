@@ -117,7 +117,7 @@ and different code is run based on what each message contains.'''
 ### if the author is the bot, cancel everything
 
     currenttime = time()
-    if currenttime >= randomtime and coinscreated == 0 and randomtime-currenttime <= 0:
+    if (currenttime >= randomtime or randomtime-currenttime <= 0) and coinscreated == 0:
             coinscreated += 1
             await coinCreate()
     
@@ -131,7 +131,14 @@ and different code is run based on what each message contains.'''
             
         readmsg = message.content.lower() # sets readmsg to the content of the message, in all lower case
                 
-        
+        if readmsg.startswith("coin settime") and admin:
+            words = readmsg.split(" ")
+            try:
+                timetoset = int(words[2])
+                randomtime = time()+timetoset
+                await message.channel.send("<a:cowardcoin:813889535699189871> | Time changed to "+str(timetoset)+" seconds from now")
+            except:
+                await message.channel.send("<a:cowardcoin:813889535699189871> | There was an error ...")
         
         if readmsg.startswith("create coin") and admin: # if the user is an admin AND the message starts with "create coin",
             await coinCreate() # runs the subroutine to create a coin. await means it can run asynchronously
