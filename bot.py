@@ -8,7 +8,9 @@ from random import randint
 from time import *
 from math import ceil,floor
 
-logtime = strftime("%Y.%m.%d - %H.%M.%S")
+if not os.path.exists(strftime("logs\\%Y.%m.%d\\")):
+    os.makedirs(strftime("logs\\%Y.%m.%d\\"))
+logtime = strftime("%Y.%m.%d\\%H.%M.%S")
 file = open("logs\\%s.txt"% logtime,"w")
 file.close()
 logging.basicConfig(filename="logs\\%s.txt" % logtime,
@@ -161,7 +163,21 @@ and different code is run based on what each message contains.'''
                     coinavailable = False
 
         if readmsg.startswith("coin timeleft") and admin:
-            await message.channel.send("<a:cowardcoin:813889535699189871> | "+str(round(randomtime-time()))+" seconds left")
+            seconds = round(randomtime-time())
+            minutes = seconds/60
+            hours = minutes/60
+            hours = floor(hours)
+            minutes = minutes-(hours*60)
+            seconds=seconds-(minutes*60)
+            
+            if floor(minutes) > 0:
+                if floor(hours) > 0:
+                    await message.channel.send("<a:cowardcoin:813889535699189871> | "+str(hours)+" hours, "+str(minutes)+" minutes and "+str(seconds)+" seconds left")
+                else:
+                    await message.channel.send("<a:cowardcoin:813889535699189871> | "+str(minutes)+" minutes and "+str(seconds)+" seconds left")
+            else:
+                await message.channel.send("<a:cowardcoin:813889535699189871> | "+str(seconds)+" seconds left")
+
 
 
         
