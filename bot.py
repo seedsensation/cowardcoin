@@ -133,7 +133,36 @@ and different code is run based on what each message contains.'''
 
             
         readmsg = message.content.lower() # sets readmsg to the content of the message, in all lower case
+
+        if readmsg.startswith("send coins"):
+            if len(message.mentions) == 1:
+                mention = message.mentions[0]
+                textfile = open("files\\coins.txt","r")
+                coins = eval(textfile.read())
+                textfile.close()
+                command = readmsg.split(" ")
+                coinssent = command[3]
+                print(coinssent)
+                coinssent = int(coinssent)
+                print(coins)
+                if coins[str(message.author.id)] > int(coinssent):
+                    coins[str(message.author.id)] = coins[str(message.author.id)]-int(coinssent)
+                    coins[str(mention.id)] = coins[str(mention.id)]+int(coinssent)
+                    await message.channel.send("<a:cowardcoin:813889535699189871> | "+message.author.mention+" sent "+mention.mention+" "+str(coinssent)+" coins!")
+                else:
+                    await message.channel.send("<a:cowardcoin:813889535699189871> | You don't have enough coins!")
+
+                    
+                        
                 
+                
+
+            elif len(message.mentions) == 0:
+                await message.channel.send("<a:cowardcoin:813889535699189871> | This message doesn't mention anyone!")
+            else:
+                await messag.echannel.send("<a:cowardcoin:813889535699189871> | This message has too many mentions!")
+
+        
         if readmsg.startswith("coin settime") and admin:
             words = readmsg.split(" ")
             try:
