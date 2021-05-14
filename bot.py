@@ -117,6 +117,9 @@ and different code is run based on what each message contains.'''
 ### if the author is the bot, cancel everything
 
     currenttime = time()
+    print(currenttime)
+    print(randomtime)
+    print(randomtime-currenttime)
     if (currenttime >= randomtime or randomtime-currenttime <= 0) and coinscreated == 0:
             coinscreated += 1
             await coinCreate()
@@ -237,7 +240,6 @@ and different code is run based on what each message contains.'''
             textfile.close()
             await asyncio.sleep(5)
             coindrop = False
-            await msg.delete()
 
         textfile = open("files\\messagessent.txt","w")
         textfile.write(str(messagessent))
