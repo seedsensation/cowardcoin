@@ -1,5 +1,0 @@
-i am EXTREMELY bad at using git.
-ive learned most of this in my own time over the last week from random tutorials and i mean. it's . not going great.
-i still don't understand rebase
-i also dont understand how i lost all progress on the betting branch on github despite not pushing it
-well. im just leaving this disclaimer here in case anyone even sees this
