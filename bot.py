@@ -61,7 +61,7 @@ msg = ""
 seconds = 0
 
 async def coinCreate():
-    global coinavailable,coingiven,randomtime,coinscreated
+    global coinavailable,coingiven,randomtime,coinscreated,msg
     print("creating new coin")
     if coinavailable != True:
         coingiven = False
@@ -104,6 +104,7 @@ and different code is run based on what each message contains.'''
     global coinavailable
     global randomtime
     global coindrop
+    global msg
     global confirmationneeded
     
     admin = False
