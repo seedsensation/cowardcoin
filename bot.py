@@ -61,7 +61,7 @@ msg = ""
 seconds = 0
 
 async def coinCreate():
-    global coinavailable,coingiven,msg,randomtime
+    global coinavailable,coingiven,randomtime,coinscreated
     print("creating new coin")
     if coinavailable != True:
         coingiven = False
@@ -77,9 +77,11 @@ async def coinCreate():
         randomtime = time()+randint(60,3600)
 
         await asyncio.sleep(30)
+        coinavailable=False
+        coinscreated = 0
         await msg.delete()
         await channel.send("<a:cowardcoin:813889535699189871> | The Coin went unclaimed ...")
-        coinavailable=False
+
     else:
         print("coin not available")
 
@@ -100,7 +102,6 @@ and different code is run based on what each message contains.'''
     global coinscreated
     global coingiven
     global coinavailable
-    global msg
     global randomtime
     global coindrop
     global confirmationneeded
