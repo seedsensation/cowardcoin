@@ -218,34 +218,34 @@ and different code is run based on what each message contains.'''
         textfile = open("files\\messagessent.txt","r")
         messagessent = eval(textfile.read())
         textfile.close()
-        
-        author = message.author.id
-        if author not in messagessent:
-            messagessent[author] = [0,10]
-        if coindrop == False:
-            messagessent[author][0] = messagessent[author][0]+1
-        if messagessent[author][0] >= messagessent[author][1]:
-            coindrop = True
-            messagessent[author][0] = 0
-            messagessent[author][1] = ceil(messagessent[author][1]*1.25)
-            coinsadd = randint(20,50)
-            msg = await message.channel.send("<a:cowardcoin:813889535699189871> | You got +"+str(coinsadd)+" CowardCoins, "+message.author.mention+"!")
-            textfile = open("files\\coins.txt","r")
-            coins = eval(textfile.read())
-            textfile.close()
-            try:
-                coins[message.author.id] = coins[message.author.id]+coinsadd
-            except KeyError:
-                coins[message.author.id] = coinsadd
-            textfile = open("files\\coins.txt","w")
-            textfile.write(str(coins))
-            textfile.close()
-            await asyncio.sleep(5)
-            coindrop = False
+        if message.author.bot == False:
+            author = message.author.id
+            if author not in messagessent:
+                messagessent[author] = [0,10]
+            if coindrop == False:
+                messagessent[author][0] = messagessent[author][0]+1
+            if messagessent[author][0] >= messagessent[author][1]:
+                coindrop = True
+                messagessent[author][0] = 0
+                messagessent[author][1] = ceil(messagessent[author][1]*1.25)
+                coinsadd = randint(20,50)
+                msg = await message.channel.send("<a:cowardcoin:813889535699189871> | You got +"+str(coinsadd)+" CowardCoins, "+message.author.mention+"!")
+                textfile = open("files\\coins.txt","r")
+                coins = eval(textfile.read())
+                textfile.close()
+                try:
+                    coins[message.author.id] = coins[message.author.id]+coinsadd
+                except KeyError:
+                    coins[message.author.id] = coinsadd
+                textfile = open("files\\coins.txt","w")
+                textfile.write(str(coins))
+                textfile.close()
+                await asyncio.sleep(5)
+                coindrop = False
 
-        textfile = open("files\\messagessent.txt","w")
-        textfile.write(str(messagessent))
-        textfile.close()
+            textfile = open("files\\messagessent.txt","w")
+            textfile.write(str(messagessent))
+            textfile.close()
 
         
         
