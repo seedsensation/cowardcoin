@@ -98,7 +98,15 @@ async def coinCreate():
         coinavailable=False
         coinscreated = 0
         await msg.delete()
-        await channel.send("<a:cowardcoin:813889535699189871> | The Coin went unclaimed ...")
+        if coinchance == 1:    # red coin
+            emote = "<a:redcoin:844545670709772290>"
+        elif coinchance <= 20: # gold coin
+            emote = "<a:goldcoin:813889535699189871>"
+        elif coinchance <= 50: # silver coin
+            emote = "<a:silvercoin:844545665911881788>"
+        else:                  # bronze coin
+            emote = "<a:bronzecoin:844545666201288755>"
+        await channel.send(emote+" | The Coin went unclaimed ...")
 
     else:
         print("coin not available")
@@ -160,9 +168,9 @@ and different code is run based on what each message contains.'''
             try:
                 timetoset = int(words[2])
                 randomtime = time()+timetoset
-                await message.channel.send("<a:cowardcoin:813889535699189871> | Time changed to "+str(timetoset)+" seconds from now")
+                await message.channel.send("<a:goldcoin:813889535699189871> | Time changed to "+str(timetoset)+" seconds from now")
             except:
-                await message.channel.send("<a:cowardcoin:813889535699189871> | There was an error ...")
+                await message.channel.send("<a:goldcoin:813889535699189871> | There was an error ...")
         
         if readmsg.startswith("create coin") and admin: # if the user is an admin AND the message starts with "create coin",
             await coinCreate() # runs the subroutine to create a coin. await means it can run asynchronously
@@ -217,11 +225,11 @@ and different code is run based on what each message contains.'''
             
             if floor(minutes) > 0:
                 if floor(hours) > 0:
-                    await message.channel.send("<a:cowardcoin:813889535699189871> | "+str(hours)+" hours, "+str(minutes)+" minutes and "+str(seconds)+" seconds left")
+                    await message.channel.send("<a:goldcoin:813889535699189871> | "+str(hours)+" hours, "+str(minutes)+" minutes and "+str(seconds)+" seconds left")
                 else:
-                    await message.channel.send("<a:cowardcoin:813889535699189871> | "+str(minutes)+" minutes and "+str(seconds)+" seconds left")
+                    await message.channel.send("<a:goldcoin:813889535699189871> | "+str(minutes)+" minutes and "+str(seconds)+" seconds left")
             else:
-                await message.channel.send("<a:cowardcoin:813889535699189871> | "+str(seconds)+" seconds left")
+                await message.channel.send("<a:goldcoin:813889535699189871> | "+str(seconds)+" seconds left")
 
 
 
@@ -241,10 +249,10 @@ and different code is run based on what each message contains.'''
             goal = messagessent[authorid][1]
             if authorid not in coins:
                 coins[authorid] = 0
-            await message.channel.send("<a:cowardcoin:813889535699189871> | "+message.author.mention+" has "+str(coins[authorid])+" CowardCoins.\n<a:cowardcoin:813889535699189871> | You have "+str(goal-current)+" messages to your next CowardCoin drop!")
+            await message.channel.send("<a:goldcoin:813889535699189871> | "+message.author.mention+" has "+str(coins[authorid])+" CowardCoins.\n<a:goldcoin:813889535699189871> | You have "+str(goal-current)+" messages to your next CowardCoin drop!")
 
         if readmsg.startswith("coin help"):
-            await message.channel.send("<a:cowardcoin:813889535699189871> | 'get coin' - claims the available coin\n<a:cowardcoin:813889535699189871> | 'coin count' - show how many coins you have\n<a:cowardcoin:813889535699189871> | 'coin help' - shows this list")
+            await message.channel.send("<a:goldcoin:813889535699189871> | 'get coin' - claims the available coin\n<a:goldcoin:813889535699189871> | 'coin count' - show how many coins you have\n<a:goldcoin:813889535699189871> | 'coin help' - shows this list")
 
 
         textfile = open("files\\messagessent.txt","r")
@@ -261,7 +269,7 @@ and different code is run based on what each message contains.'''
                 messagessent[author][0] = 0
                 messagessent[author][1] = ceil(messagessent[author][1]*1.25)
                 coinsadd = randint(20,50)
-                msg = await message.channel.send("<a:cowardcoin:813889535699189871> | You got +"+str(coinsadd)+" CowardCoins, "+message.author.mention+"!")
+                msg = await message.channel.send("<a:goldcoin:813889535699189871> | You got +"+str(coinsadd)+" CowardCoins, "+message.author.mention+"!")
                 textfile = open("files\\coins.txt","r")
                 coins = eval(textfile.read())
                 textfile.close()
