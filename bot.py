@@ -58,29 +58,39 @@ confirmationneeded = False
 
 msg = ""
 
+coinchance = 0
+
 seconds = 0
 
 async def coinCreate():
-    global coinavailable,coingiven,randomtime,coinscreated,msg
+    global coinavailable,coingiven,randomtime,coinscreated,msg,coinchance
     print("creating new coin")
     if coinavailable != True:
         coingiven = False
         coinchance = randint(1,100)
         if coinchance == 1:
-            file = discord.File("files\\1cowardcoin.gif",filename="1cowardcoin.gif")
+            file = discord.File("files\\ultrarare.gif",filename="ultrarare.gif")
         elif coinchance <= 20:
-            file = discord.File("files\\25cowardcoin.gif",filename="25cowardcoin.gif")
+            file = discord.File("files\\gold.gif",filename="gold.gif")
         elif coinchance <= 50:
-            file = discord.File("files\\75cowardcoin.gif",filename="75cowardcoin.gif")
+            file = discord.File("files\\silver.gif",filename="silver.gif")
         else:
-            file = discord.File("files\\100cowardcoin.gif",filename="100cowardcoin.gif")
+            file = discord.File("files\\bronze.gif",filename="bronze.gif")
         print("selected gif file")
         if maintenence == False:
             channel = client.get_channel(int(COINCHANNEL))
         else:
             channel = client.get_channel(int(ADMINCHANNEL))
-            
-        msg = await channel.send("A New Coin is Available!\nType 'get coin' to claim it!",file=file)
+
+        if coinchance == 1:
+            msg = await channel.send("An Ultra-Rare Red Coin is Available!\nType 'get coin' to claim it!",file=file)
+        elif coinchance <= 20:
+            msg = await channel.send("A Gold Coin is Available!\nType 'get coin' to claim it!",file=file)
+        elif coinchance <= 50:
+            msg = await channel.send("A Silver Coin is Available!\nType 'get coin' to claim it!",file=file)
+        else:
+            msg = await channel.send("A Bronze Coin is Available!\nType 'get coin' to claim it!",file=file)
+        
         coinavailable=True
         randomtime = time()+randint(60,3600)
 
@@ -114,6 +124,7 @@ and different code is run based on what each message contains.'''
     global coindrop
     global msg
     global confirmationneeded
+    global coinchance
     
     admin = False
     for roles in message.author.roles: # for each role the author of the message has:
@@ -164,7 +175,20 @@ and different code is run based on what each message contains.'''
                     textfile = open("files\\coins.txt","r")
                     coins = eval(textfile.read())
                     textfile.close()
-                    coinsadd = randint(150,350)
+                    print(coinchance)
+                    if coinchance == 1:    # red coin
+                        coinsadd = randint(1500,4000)
+                        emote = "<a:redcoin:844545670709772290>"
+                    elif coinchance <= 20: # gold coin
+                        coinsadd = randint(500,1500)
+                        emote = "<a:goldcoin:813889535699189871>"
+                    elif coinchance <= 50: # silver coin
+                        coinsadd = randint(250,500)
+                        emote = "<a:silvercoin:844545665911881788>"
+                    else:                  # bronze coin
+                        coinsadd = randint(1,150)
+                        emote = "<a:bronzecoin:844545666201288755>"
+                    
                     try:
                         coins[message.author.id] = coins[message.author.id]+coinsadd
                     except KeyError:
@@ -174,7 +198,7 @@ and different code is run based on what each message contains.'''
                     textfile.write(str(coins))
                     textfile.close()
                     
-                    await message.channel.send("<a:cowardcoin:813889535699189871> | "+message.author.mention+" collected "+str(coinsadd)+" CowardCoins!")
+                    await message.channel.send(emote+" | "+message.author.mention+" collected "+str(coinsadd)+" CowardCoins!")
                     await message.delete()
                        
                     await msg.delete()
