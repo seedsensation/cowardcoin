@@ -213,6 +213,12 @@ and different code is run based on what each message contains.'''
                     await asyncio.sleep(10)
                     coinavailable = False
 
+        if readmsg.startswith("coin") and "please" in readmsg:
+            chance = randint(1,10)
+            if chance == 1:
+                message.channel.send("no")
+
+        
         if readmsg.startswith("coin timeleft") and admin:
             seconds = round(randomtime-time())
             minutes = seconds/60
