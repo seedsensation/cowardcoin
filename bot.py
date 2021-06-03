@@ -217,9 +217,9 @@ and different code is run based on what each message contains.'''
             chance = randint(1,100)
             print(chance)
             if chance <= 10:
-                message.channel.send("no")
-            elif chance == 69:
-                await createcoin()
+                await message.channel.send("no")
+            elif chance == 90:
+                await coinCreate()
 
         
         if readmsg.startswith("coin timeleft") and admin:
