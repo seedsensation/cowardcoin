@@ -162,7 +162,19 @@ and different code is run based on what each message contains.'''
 
             
         readmsg = message.content.lower() # sets readmsg to the content of the message, in all lower case
-                
+
+        if readmsg.startswith("set coins") and maintenence:
+            words = readmsg.split(" ")
+            textfile = open("files\\coins.txt","r")
+            coins = eval(textfile.read())
+            textfile.close()
+            coins[message.author.id] = int(words[2])
+            await message.channel.send("Given "+str(words[2])+"coins to "+str(message.author.name))
+            file = open("files\\coins.txt","w")
+            file.write(str(coins))
+            file.close()
+            
+        
         if readmsg.startswith("coin settime") and admin:
             words = readmsg.split(" ")
             try:

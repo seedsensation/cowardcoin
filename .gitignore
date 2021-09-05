@@ -2,6 +2,6 @@
 /files/coins.txt
 /files/currentbet.txt
 /files/messagessent.txt
-/files/cowardcoin.bat
+cowardcoin.bat
 /__pycache__
 /logs
