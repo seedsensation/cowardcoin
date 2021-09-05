@@ -22,7 +22,7 @@ logging.basicConfig(filename="logs\\%s.txt" % logtime,
 
 
 
-maintenence = False ### if maintenence is set to True, it changes how things work slightly and what channels each message are sent in
+maintenence = True ### if maintenence is set to True, it changes how things work slightly and what channels each message are sent in
 
 if maintenence: # if maintenence mode is active:
     randomtime = (time()+99999999999999999) # stops coins from being created instantly when in maintenance mode
@@ -63,6 +63,17 @@ msg = ""
 coinchance = 0
 
 seconds = 0
+
+def updateCoins(coins):
+    textfile = open("files\\coins.txt","w")
+    textfile.write(str(coins))
+    textfile.close()
+    filepath = str("backups\\"+str(datetime.date.today()))
+    Path(filepath).mkdir(parents=True,exist_ok=True)
+    textfile = open(str(filepath+"\\"+str(datetime.datetime.now().strftime("%H-%M-%S"))+".txt"),"w")
+    textfile.write(str(coins))
+    textfile.close()
+
 
 async def coinCreate():
     global coinavailable,coingiven,randomtime,coinscreated,msg,coinchance
@@ -172,9 +183,43 @@ and different code is run based on what each message contains.'''
             textfile.close()
             coins[message.author.id] = int(words[2])
             await message.channel.send("Given "+str(words[2])+"coins to "+str(message.author.name))
-            file = open("files\\coins.txt","w")
-            file.write(str(coins))
-            file.close()
+            updateCoins(coins)
+
+        if "give" in readmsg and ("coins" in readmsg or "coin" in readmsg):
+            words = readmsg.split(" ")
+            textfile = open("files\\coins.txt","r")
+            coins = eval(textfile.read())
+            textfile.close()
+
+            if message.mentions[0].id not in coins:
+                await message.channel.send("<a:goldcoin:813889535699189871> | That person doesn't have any coins yet! Try someone else.")
+            elif len(message.mentions) == 1:
+                sender = message.author
+                receiver = message.mentions[0]
+                given = []
+                for item in words:
+     
+                    try:
+                        given.append(int(item))
+                    except:
+                        
+                        print("error")
+
+                
+                if len(given) != 1:
+                    await message.channel.send("<a:goldcoin:813889535699189871> | Make sure there's one number in your message!")
+                else:
+                    given = given[0]
+                    
+                    if coins[sender.id] < given:
+                        await message.channel.send("<a:goldcoin:813889535699189871> | You don't have enough coins!")
+                    else:
+                        coins[sender.id] = coins[sender.id]-given
+                        coins[receiver.id] = coins[receiver.id]+given
+                        updateCoins(coins)
+                        await message.channel.send("<a:goldcoin:813889535699189871> | Giving "+str(given)+" coins to "+receiver.mention+" from "+sender.mention+" successfully!")
+                    
+
             
         
         if readmsg.startswith("coin settime") and admin:
@@ -216,14 +261,7 @@ and different code is run based on what each message contains.'''
                     except KeyError:
                         coins[message.author.id] = coinsadd
                     
-                    textfile = open("files\\coins.txt","w")
-                    textfile.write(str(coins))
-                    textfile.close()
-                    filepath = str("backups\\"+str(datetime.date.today()))
-                    Path(filepath).mkdir(parents=True,exist_ok=True)
-                    textfile = open(str(filepath+"\\"+str(datetime.datetime.now().strftime("%H-%M-%S"))+".txt"),"w")
-                    textfile.write(str(coins))
-                    textfile.close()
+                    updateCoins(coins)
                     
                     await message.channel.send(emote+" | "+message.author.mention+" collected "+str(coinsadd)+" CowardCoins!")
                     await message.delete()
@@ -305,9 +343,7 @@ and different code is run based on what each message contains.'''
                     coins[message.author.id] = coins[message.author.id]+coinsadd
                 except KeyError:
                     coins[message.author.id] = coinsadd
-                textfile = open("files\\coins.txt","w")
-                textfile.write(str(coins))
-                textfile.close()
+                updateCoins(coins)
                 await asyncio.sleep(5)
                 coindrop = False
 
