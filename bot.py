@@ -22,7 +22,7 @@ logging.basicConfig(filename="logs\\%s.txt" % logtime,
 
 
 
-maintenence = True ### if maintenence is set to True, it changes how things work slightly and what channels each message are sent in
+maintenence = False ### if maintenence is set to True, it changes how things work slightly and what channels each message are sent in
 
 if maintenence: # if maintenence mode is active:
     randomtime = (time()+99999999999999999) # stops coins from being created instantly when in maintenance mode
