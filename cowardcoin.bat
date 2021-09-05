@@ -1,0 +1,1 @@
+python C:\Users\jemst\Desktop\Folders\Cowardcoin\Directory\bot.py

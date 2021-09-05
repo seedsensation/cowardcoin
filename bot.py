@@ -7,6 +7,8 @@ from dotenv import load_dotenv ### lets the program access secure file containin
 from random import randint
 from time import *
 from math import ceil,floor
+import datetime
+from pathlib import Path
 
 if not os.path.exists(strftime("logs\\%Y.%m.%d\\")):
     os.makedirs(strftime("logs\\%Y.%m.%d\\"))
@@ -162,7 +164,19 @@ and different code is run based on what each message contains.'''
 
             
         readmsg = message.content.lower() # sets readmsg to the content of the message, in all lower case
-                
+
+        if readmsg.startswith("set coins") and maintenence:
+            words = readmsg.split(" ")
+            textfile = open("files\\coins.txt","r")
+            coins = eval(textfile.read())
+            textfile.close()
+            coins[message.author.id] = int(words[2])
+            await message.channel.send("Given "+str(words[2])+"coins to "+str(message.author.name))
+            file = open("files\\coins.txt","w")
+            file.write(str(coins))
+            file.close()
+            
+        
         if readmsg.startswith("coin settime") and admin:
             words = readmsg.split(" ")
             try:
@@ -203,6 +217,11 @@ and different code is run based on what each message contains.'''
                         coins[message.author.id] = coinsadd
                     
                     textfile = open("files\\coins.txt","w")
+                    textfile.write(str(coins))
+                    textfile.close()
+                    filepath = str("backups\\"+str(datetime.date.today()))
+                    Path(filepath).mkdir(parents=True,exist_ok=True)
+                    textfile = open(str(filepath+"\\"+str(datetime.datetime.now().strftime("%H-%M-%S"))+".txt"),"w")
                     textfile.write(str(coins))
                     textfile.close()
                     
