@@ -6,6 +6,9 @@ Required Libraries for Python 3.9:
 - dotenv
 ```
 
+Roadmap, in order of priority:
+1. give coin - allows users to give coins to each other
+2. make cowardcoin able to run in any server simply using an invite link in the readme.md
 
 Run extra programs\makefile.py to get started - if you have no experience with discord bots, it'll guide you through every step. if you have experience, it'll just ask for all the numbers + tokens it needs. :)
 
