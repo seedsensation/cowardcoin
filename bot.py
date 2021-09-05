@@ -213,11 +213,13 @@ and different code is run based on what each message contains.'''
                     
                     if coins[sender.id] < given:
                         await message.channel.send("<a:goldcoin:813889535699189871> | You don't have enough coins!")
+                    elif given < 0:
+                        await message.channel.send("<a:goldcoin:813889535699189871> | You... You can't give negative coins.")
                     else:
                         coins[sender.id] = coins[sender.id]-given
                         coins[receiver.id] = coins[receiver.id]+given
                         updateCoins(coins)
-                        await message.channel.send("<a:goldcoin:813889535699189871> | Giving "+str(given)+" coins to "+receiver.mention+" from "+sender.mention+" successfully!")
+                        await message.channel.send("<a:goldcoin:813889535699189871> | Given "+str(given)+" coins to "+receiver.mention+" from "+sender.mention+" successfully!")
                     
 
             
