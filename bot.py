@@ -219,7 +219,7 @@ and different code is run based on what each message contains.'''
                         coins[sender.id] = coins[sender.id]-given
                         coins[receiver.id] = coins[receiver.id]+given
                         updateCoins(coins)
-                        await message.channel.send("<a:goldcoin:813889535699189871> | Given "+str(given)+" coins to "+receiver.mention+" from "+sender.mention+" successfully!")
+                        await message.channel.send("<a:goldcoin:813889535699189871> | Given "+str(given)+" coins to "+str(receiver.name)+" from "+str(sender.name)+" successfully!")
                     
 
             
